@@ -45,7 +45,7 @@ function getLabT5(){
 		wood -= labT5WoodCost;
 		gem -= labT5GemCost;
 		metal -= labT5MetalCost;
-		labT5 += 1;
+		labT5 += 10;
 		updateLabCost();
 	}
 }
