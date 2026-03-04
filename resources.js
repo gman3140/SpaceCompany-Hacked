@@ -47,34 +47,34 @@ function gainResources(delta) {
 }
 
 function getMaxPlasma() {
-	return 100000 + (50000 * PSU) + (500000 * PSUT2);
+	return 100000 + (50000000 * PSU) + (5000000000 * PSUT2);
 }
 
 function getMaxEnergy() {
-	return (100000 + (50000 * battery) + (500000 * batteryT2) + (5000000 * batteryT3) + (50000000*batteryT4) + (500000000*batteryT5)) * ((Game.tech.entries.batteryEfficiencyResearch.current/100)+1);
+	return (100000 + (500000 * battery) + (5000000 * batteryT2) + (50000000 * batteryT3) + (500000000*batteryT4) + (5000000000000*batteryT5)) * ((Game.tech.entries.batteryEfficiencyResearch.current/100)+1);
 }
 
 // Gain Buttons
 
 function gainResource(resource){
 	if(resource === RESOURCE.Plasma){
-		if(getResource(RESOURCE.Energy) >= 1000 * gainNum && getResource(RESOURCE.Hydrogen) >= 10 * gainNum && getResource(RESOURCE.Plasma) < getMaxPlasma()){
+		if(getResource(RESOURCE.Energy) >= 10 * gainNum && getResource(RESOURCE.Hydrogen) >= 1 * gainNum && getResource(RESOURCE.Plasma) < getMaxPlasma()){
 			Game.resources.addResource(RESOURCE.Plasma, gainNum);
-			Game.resources.takeResource(RESOURCE.Energy, 1000 * gainNum);
-			Game.resources.takeResource(RESOURCE.Hydrogen, 10 * gainNum);
+			Game.resources.takeResource(RESOURCE.Energy, 10 * gainNum);
+			Game.resources.takeResource(RESOURCE.Hydrogen, 1 * gainNum);
 			Game.statistics.add('manualResources', gainNum);
 		}
 	} else if(resource === RESOURCE.Charcoal){
-		if(getResource(RESOURCE.Charcoal) < getStorage(RESOURCE.Charcoal) && getResource(RESOURCE.Wood) >= 2 * gainNum){
+		if(getResource(RESOURCE.Charcoal) < getStorage(RESOURCE.Charcoal) && getResource(RESOURCE.Wood) >= 1 * gainNum){
 			Game.resources.addResource(RESOURCE.Charcoal, gainNum);
-			Game.resources.takeResource(RESOURCE.Wood, 2 * gainNum);
+			Game.resources.takeResource(RESOURCE.Wood, 1 * gainNum);
 			Game.statistics.add('manualResources', gainNum);
 		}
 	} else if(resource === RESOURCE.Meteorite){
 		if(getResource(RESOURCE.Meteorite) < getStorage(RESOURCE.Meteorite)){
 			if(getResource(RESOURCE.Plasma) >= 3 * gainNum){
 				Game.resources.addResource(RESOURCE.Meteorite, gainNum);
-				Game.resources.takeResource(RESOURCE.Plasma, 3 * gainNum);
+				Game.resources.takeResource(RESOURCE.Plasma, 1 * gainNum);
 				Game.statistics.add('manualResources', gainNum);
 			}
 		}
@@ -93,7 +93,7 @@ function upgradeUraniumStorage(){
 		Game.resources.takeResource(RESOURCE.Uranium, getStorage(RESOURCE.Uranium)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Uranium)/2.5*storagePrice);
 		uraniumStorage = uraniumNextStorage;
-		uraniumNextStorage *= 2;
+		uraniumNextStorage *= 10;
 	}
 }
 
@@ -102,7 +102,7 @@ function upgradeOilStorage(){
 		Game.resources.takeResource(RESOURCE.Oil, getStorage(RESOURCE.Oil)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Oil)/2.5*storagePrice);
 		oilStorage = oilNextStorage;
-		oilNextStorage *= 2;
+		oilNextStorage *= 10;
 	}
 }
 
@@ -110,7 +110,7 @@ function upgradeMetalStorage(){
 	if(getResource(RESOURCE.Metal) >= getStorage(RESOURCE.Metal)*storagePrice){
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Metal)*storagePrice);
 		metalStorage = metalNextStorage;
-		metalNextStorage *= 2;
+		metalNextStorage *= 10;
 	}
 }
 
@@ -119,7 +119,7 @@ function upgradeGemStorage(){
 		Game.resources.takeResource(RESOURCE.Gem, getStorage(RESOURCE.Gem)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Gem)/2.5*storagePrice);
 		gemStorage = gemNextStorage;
-		gemNextStorage *= 2;
+		gemNextStorage *= 10;
 	}
 }
 
@@ -128,7 +128,7 @@ function upgradeCharcoalStorage(){
 		Game.resources.takeResource(RESOURCE.Charcoal, getStorage(RESOURCE.Charcoal)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Charcoal)/2.5*storagePrice);
 		charcoalStorage = charcoalNextStorage;
-		charcoalNextStorage *= 2;
+		charcoalNextStorage *= 10;
 	}
 }
 
@@ -137,7 +137,7 @@ function upgradeWoodStorage(){
 		Game.resources.takeResource(RESOURCE.Wood, getStorage(RESOURCE.Wood)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Wood)/2.5*storagePrice);
 		woodStorage = woodNextStorage;
-		woodNextStorage *= 2;
+		woodNextStorage *= 10;
 	}
 }
 
@@ -146,7 +146,7 @@ function upgradeLunariteStorage(){
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Lunarite)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Metal, getStorage(RESOURCE.Lunarite)*4*storagePrice);
 		lunariteStorage = lunariteNextStorage;
-		lunariteNextStorage *= 2;
+		lunariteNextStorage *= 10;
 	}
 }
 
@@ -155,7 +155,7 @@ function upgradeMethaneStorage(){
 		Game.resources.takeResource(RESOURCE.Methane, getStorage(RESOURCE.Methane)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Methane)/2.5*storagePrice);
 		methaneStorage = methaneNextStorage;
-		methaneNextStorage *= 2;
+		methaneNextStorage *= 10;
 	}
 }
 
@@ -164,7 +164,7 @@ function upgradeTitaniumStorage(){
 		Game.resources.takeResource(RESOURCE.Titanium, getStorage(RESOURCE.Titanium)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Titanium)/2.5*storagePrice);
 		titaniumStorage = titaniumNextStorage;
-		titaniumNextStorage *= 2;
+		titaniumNextStorage *= 10;
 	}
 }
 
@@ -173,7 +173,7 @@ function upgradeGoldStorage(){
 		Game.resources.takeResource(RESOURCE.Gold, getStorage(RESOURCE.Gold)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Gold)/2.5*storagePrice);
 		goldStorage = goldNextStorage;
-		goldNextStorage *= 2;
+		goldNextStorage *= 10;
 	}
 }
 
@@ -182,7 +182,7 @@ function upgradeSilverStorage(){
 		Game.resources.takeResource(RESOURCE.Silver, getStorage(RESOURCE.Silver)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Silver)/2.5*storagePrice);
 		silverStorage = silverNextStorage;
-		silverNextStorage *= 2;
+		silverNextStorage *= 10;
 	}
 }
 
@@ -191,7 +191,7 @@ function upgradeSiliconStorage(){
 		Game.resources.takeResource(RESOURCE.Silicon, getStorage(RESOURCE.Silicon)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Silicon)/2.5*storagePrice);
 		siliconStorage = siliconNextStorage;
-		siliconNextStorage *= 2;
+		siliconNextStorage *= 10;
 	}
 }
 
@@ -200,7 +200,7 @@ function upgradeLavaStorage(){
 		Game.resources.takeResource(RESOURCE.Lava, getStorage(RESOURCE.Lava)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Lava)/2.5*storagePrice);
 		lavaStorage = lavaNextStorage;
-		lavaNextStorage *= 2;
+		lavaNextStorage *= 10;
 	}
 }
 
@@ -209,7 +209,7 @@ function upgradeHydrogenStorage(){
 		Game.resources.takeResource(RESOURCE.Hydrogen, getStorage(RESOURCE.Hydrogen)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Hydrogen)/2.5*storagePrice);
 		hydrogenStorage = hydrogenNextStorage;
-		hydrogenNextStorage *= 2;
+		hydrogenNextStorage *= 10;
 	}
 }
 
@@ -218,7 +218,7 @@ function upgradeHeliumStorage(){
 		Game.resources.takeResource(RESOURCE.Helium, getStorage(RESOURCE.Helium)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Helium)/2.5*storagePrice);
 		heliumStorage = heliumNextStorage;
-		heliumNextStorage *= 2;
+		heliumNextStorage *= 10;
 	}
 }
 
@@ -227,7 +227,7 @@ function upgradeIceStorage(){
 		Game.resources.takeResource(RESOURCE.Ice, getStorage(RESOURCE.Ice)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Ice)/2.5*storagePrice);
 		iceStorage = iceNextStorage;
-		iceNextStorage *= 2;
+		iceNextStorage *= 10;
 	}
 }
 
@@ -236,7 +236,7 @@ function upgradeMeteoriteStorage(){
 		Game.resources.takeResource(RESOURCE.Meteorite, getStorage(RESOURCE.Meteorite)*storagePrice);
 		Game.resources.takeResource(RESOURCE.Lunarite, getStorage(RESOURCE.Meteorite)*4*storagePrice);
 		meteoriteStorage = meteoriteNextStorage;
-		meteoriteNextStorage *= 2;
+		meteoriteNextStorage *= 10;
 	}
 }
 
